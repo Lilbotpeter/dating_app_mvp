@@ -14,9 +14,7 @@ class AppWidget extends StatelessWidget {
         colorSchemeSeed: Colors.indigo,
         textTheme: GoogleFonts.interTextTheme(),
       ),
-      routerDelegate: Modular.routerDelegate,
-      routeInformationParser: Modular.routeInformationParser,
-      routeInformationProvider: Modular.routerConfig.routeInformationProvider,
+      routerConfig: Modular.routerConfig,
     );
   }
 }

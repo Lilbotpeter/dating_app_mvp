@@ -10,7 +10,7 @@ class AppShell extends StatefulWidget {
 
 class _AppShellState extends State<AppShell> {
   int _index = 0;
-  final _tab = const ['/home','/profile']; //waiting for features default Home
+  final _tab = const ['/profile/','/home/']; //waiting for features default Home
 
   @override
   void initState() {
