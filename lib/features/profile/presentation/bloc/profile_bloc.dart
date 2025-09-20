@@ -32,8 +32,10 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
 
     final local = await getLocal(const NoParams());
     if(local is DataSuccess<Profile?> && local.data != null){
+      print("local is not null");
       emit(ProfileLoaded(local.data!));
     }else{
+       print("local is  null");
       emit(const ProfileEmpty());
     }
 
