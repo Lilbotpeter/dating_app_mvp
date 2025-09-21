@@ -1,3 +1,4 @@
+import 'package:dating_china_app_mvp/core/widgets/loading_overlay.dart';
 import 'package:dating_china_app_mvp/features/profile/presentation/bloc/profile_bloc.dart';
 import 'package:dating_china_app_mvp/features/profile/presentation/bloc/profile_event.dart';
 import 'package:dating_china_app_mvp/features/profile/presentation/bloc/profile_state.dart';
@@ -58,17 +59,21 @@ class _ProfilePageState extends State<ProfilePage> {
           }
         },
         builder: (context, state){
-          if(state is ProfileLoading){
-            return const Center(child: CircularProgressIndicator());
-          }
-          if(state is ProfileEmpty || state is ProfileLoaded){
-            return _form(context);
-          }
+          final showOverlay = state is ProfileLoading;
+          Widget content;
           if(state is ProfileError){
-            return Center(child: Text('Error: ${state.message}'),);
+            content = Center(child: Text('Error: ${state.message}'),);
           }
-          return const SizedBox.shrink();
-        },),
+          else{
+            content = _form(context);
+          }
+          return LoadingOverlayWrapper(
+            show: showOverlay,
+            message: 'LOADING..',
+            child: content,
+            );
+        }
+        ),
     );
   }
 

@@ -1,4 +1,5 @@
 import 'package:dating_china_app_mvp/core/env/app_config.dart';
+import 'package:dating_china_app_mvp/core/storage/key_value_storage.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 import 'package:dating_china_app_mvp/core/network/dio_client.dart';
@@ -17,6 +18,9 @@ class CoreModule extends Module {
   void binds(Injector i) {
     //Auth store
     i.addLazySingleton<AuthLocalDS>(() => AuthLocalDS());
+
+    //Key value storage
+    i.addLazySingleton<KeyValueStorage>(() => KeyValueStorage());
 
     //Network
     i.addSingleton<NetworkErrorHandler>(() => NetworkErrorHandler());

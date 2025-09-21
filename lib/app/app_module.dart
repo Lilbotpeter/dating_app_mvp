@@ -1,7 +1,9 @@
 import 'package:dating_china_app_mvp/app/shell.dart';
 import 'package:dating_china_app_mvp/core/env/app_config.dart';
+import 'package:dating_china_app_mvp/features/onboard/onboard_module.dart';
 
 import 'package:dating_china_app_mvp/features/profile/profile_module.dart';
+import 'package:dating_china_app_mvp/features/splash/splash_module.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
@@ -30,9 +32,11 @@ class AppModule extends Module {
 
   @override
   void routes(r) {
+    r.module(Modular.initialRoute, module: SplashModule());
+    r.module('/onboard/', module: OnboardModule());
     r.child(
+      '/shell/',
       transition: TransitionType.noTransition,
-      Modular.initialRoute,
       child: (_)=> const AppShell(),
       children: [
         //Home stub waiting for features

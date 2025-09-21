@@ -46,6 +46,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   }
 
   Future<void> _onRefreshed(ProfileRefreshed event, Emitter<ProfileState> emit) async{
+    emit(const ProfileLoading());
     final remote = await fetchRemote(const NoParams());
     switch (remote) {
       case DataSuccess<Profile?>():
@@ -57,6 +58,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   }
 
   Future<void> _onSaved(ProfileSaved event, Emitter<ProfileState> emit) async {
+    emit(const ProfileLoading());
     final res = await upsert(UpsertProfileParams(event.profile));
     switch (res){
       case DataSuccess<Profile>():
@@ -67,6 +69,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   }
 
   Future<void> _onCleared(ProfileCleared event,Emitter<ProfileState> emit) async {
+    emit(const ProfileLoading());
     final res = await clear(const NoParams());
     switch (res) {
       case DataSuccess<void>():

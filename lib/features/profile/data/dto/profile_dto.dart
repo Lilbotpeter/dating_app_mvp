@@ -27,7 +27,7 @@ class ProfileDto {
     age: (json['age'] as num).toInt(), 
     gender: json['gender'] as String, 
     langs: (json['langs'] as List).map((e) => e.toString()).toList(),
-    avatarUrl: json['avatar'] as String,
+    avatarUrl: json['avatar'] as String?,
     lat: (json['lat'] as num?)?.toDouble(),
     lng: (json['lng'] as num?)?.toDouble(),
     verified: (json['verified'] as bool?) ?? false,

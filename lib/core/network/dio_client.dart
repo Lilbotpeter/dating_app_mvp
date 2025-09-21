@@ -16,7 +16,7 @@ class DioClient {
     ));
 
     _dio.interceptors.addAll([
-
+      
     ]);
   }
   late final Dio _dio;
