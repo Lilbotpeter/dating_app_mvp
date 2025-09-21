@@ -55,20 +55,20 @@ class _HomeStub extends StatelessWidget {
     return Scaffold(
       body: Center(
         child: ElevatedButton(
-  onPressed: () {
-    try {
-      final dc = Modular.get<DioClient>();
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Dio OK: ${dc.dio.options.baseUrl}')),
-      );
-    } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Dio NG: $e')),
-      );
-    }
-  },
-  child: const Text('Test DioClient'),
-)
+        onPressed: () {
+          try {
+            final dc = Modular.get<DioClient>();
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(content: Text('Dio OK: ${dc.dio.options.baseUrl}')),
+            );
+          } catch (e) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(content: Text('Dio NG: $e')),
+            );
+          }
+        },
+        child: const Text('Test DioClient'),
+      )
       ),
     );
   }

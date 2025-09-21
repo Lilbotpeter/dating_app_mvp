@@ -1,3 +1,4 @@
+import 'package:dating_china_app_mvp/core/theme/app_theme.dart';
 import 'package:dating_china_app_mvp/core/widgets/loading_overlay.dart';
 import 'package:dating_china_app_mvp/features/profile/presentation/bloc/profile_bloc.dart';
 import 'package:dating_china_app_mvp/features/profile/presentation/bloc/profile_event.dart';
@@ -20,6 +21,11 @@ class _ProfilePageState extends State<ProfilePage> {
   final age = TextEditingController(text: '25');
   String gender = 'other';
   List<String> langs = ['th'];
+  final genderItems = const [
+    ('male', 'Male'),
+    ('female', 'Female'),
+    ('other', 'Other'),
+  ];
   @override
   void initState() {
     super.initState();
@@ -101,11 +107,13 @@ class _ProfilePageState extends State<ProfilePage> {
           const SizedBox(height: 12),
           DropdownButtonFormField<String>(
             value: gender,
-            items: const [
-              DropdownMenuItem(value: 'male', child: Text('Male')),
-              DropdownMenuItem(value: 'female', child: Text('Female')),
-              DropdownMenuItem(value: 'other', child: Text('Other')),
-            ],
+            items: genderItems.map((i) {
+              return DropdownMenuItem(
+                value: i.$1,
+                child: Text(
+                  i.$2,
+                ));
+            }).toList(),
             onChanged: (v) => setState(() => gender = v ?? 'other'),
             decoration: const InputDecoration(
               labelText: 'Gender',
@@ -123,6 +131,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 onSelected: (v) => setState(() {
                   if (v) langs.add(l); else langs.remove(l);
                 }),
+                selectedColor: AppPalette.primary,
               );
             }).toList(),
           ),

@@ -1,3 +1,4 @@
+import 'package:dating_china_app_mvp/core/widgets/app_logo.dart';
 import 'package:dating_china_app_mvp/features/splash/presentation/bloc/splash_bloc.dart';
 import 'package:dating_china_app_mvp/features/splash/presentation/bloc/splash_event.dart';
 import 'package:dating_china_app_mvp/features/splash/presentation/bloc/splash_state.dart';
@@ -36,7 +37,7 @@ class _SplashPageState extends State<SplashPage> {
             );
           }
         },
-        child: const Center(child: FlutterLogo(size: 96,)),
+        child: Center(child: AppLogo(size: 140,)),
         ),
     );
   }

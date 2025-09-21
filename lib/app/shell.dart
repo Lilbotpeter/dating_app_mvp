@@ -1,3 +1,4 @@
+import 'package:dating_china_app_mvp/core/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
@@ -10,7 +11,7 @@ class AppShell extends StatefulWidget {
 
 class _AppShellState extends State<AppShell> {
   int _index = 0;
-  final _tab = const ['/shell/home/','/shell/profile/']; //waiting for features default Home
+  final _tab = const ['/shell/home/','/shell/profile/','/shell/chat/']; //waiting for features default Home
 
   @override
   void initState() {
@@ -22,6 +23,7 @@ class _AppShellState extends State<AppShell> {
     return Scaffold(
       body: const RouterOutlet(),
       bottomNavigationBar: NavigationBar(
+        indicatorColor: AppPalette.primary,
         selectedIndex: _index,
         onDestinationSelected: (i){
           setState(() => _index = i);
@@ -29,6 +31,7 @@ class _AppShellState extends State<AppShell> {
         },
         destinations: const [
           NavigationDestination(icon: Icon(Icons.home), label: 'Home'),
+          NavigationDestination(icon: Icon(Icons.chat), label: 'Chat'),
           NavigationDestination(icon: Icon(Icons.person), label: 'Profile'),
         ]),
     );
