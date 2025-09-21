@@ -1,6 +1,6 @@
+import 'package:dating_china_app_mvp/core/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class AppWidget extends StatelessWidget {
   const AppWidget({super.key});
@@ -9,11 +9,9 @@ class AppWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp.router(
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        useMaterial3: true,
-        colorSchemeSeed: Colors.indigo,
-        textTheme: GoogleFonts.interTextTheme(),
-      ),
+      theme: AppTheme.light,
+      darkTheme: AppTheme.dark,
+      themeMode: ThemeMode.system,
       routerConfig: Modular.routerConfig,
     );
   }
