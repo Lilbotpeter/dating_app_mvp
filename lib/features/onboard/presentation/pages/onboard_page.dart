@@ -1,7 +1,6 @@
 import 'package:dating_china_app_mvp/core/usecase/usecase.dart';
 import 'package:dating_china_app_mvp/core/widgets/app_logo.dart';
 import 'package:dating_china_app_mvp/features/splash/domain/usecases/complete_onboarding.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
@@ -35,7 +34,7 @@ class _OnboardPageState extends State<OnboardPage> {
             const SizedBox(height: 32),
             FilledButton(onPressed: () async {
               await complete(const NoParams());
-              Modular.to.navigate('/shell/home/');
+              Modular.to.navigate('/shell/home');
             }, 
             child: const Text("Get Started !")),
           ],

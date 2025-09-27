@@ -28,9 +28,9 @@ class _SplashPageState extends State<SplashPage> {
       body: BlocListener<SplashBloc,SplashState>(
         listener: (ctx,state){
           if(state is SplashGoOnboard){
-            Modular.to.navigate('/onboard/');
+            Modular.to.navigate('/onboard');
           } else if( state is SplashGoHome){
-            Modular.to.navigate('/shell/home/');
+            Modular.to.navigate('/shell/home');
           } else if( state is SplashError ){
             ScaffoldMessenger.of(ctx).showSnackBar(
               SnackBar(content: Text(state.message))

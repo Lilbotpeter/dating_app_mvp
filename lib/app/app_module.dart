@@ -33,15 +33,15 @@ class AppModule extends Module {
   @override
   void routes(r) {
     r.module(Modular.initialRoute, module: SplashModule());
-    r.module('/onboard/', module: OnboardModule());
+    r.module('/onboard', module: OnboardModule());
     r.child(
-      '/shell/',
+      '/shell',
       transition: TransitionType.noTransition,
       child: (_)=> const AppShell(),
       children: [
         //Home stub waiting for features
-        ChildRoute('/home/', child: (_) => const _HomeStub()),
-        ModuleRoute('/profile/', module: ProfileModule()),
+        ChildRoute('/home', child: (_) => const _HomeStub()),
+        ModuleRoute('/profile', module: ProfileModule()),
       ],
       );
   }

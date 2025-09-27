@@ -11,7 +11,7 @@ class AppShell extends StatefulWidget {
 
 class _AppShellState extends State<AppShell> {
   int _index = 0;
-  final _tab = const ['/shell/home/','/shell/profile/','/shell/chat/']; //waiting for features default Home
+  final _tab = const ['/shell/home','/shell/explore','/shell/chat','/shell/profile']; //waiting for features default Home
 
   @override
   void initState() {
@@ -31,6 +31,7 @@ class _AppShellState extends State<AppShell> {
         },
         destinations: const [
           NavigationDestination(icon: Icon(Icons.home), label: 'Home'),
+          NavigationDestination(icon: Icon(Icons.explore), label: 'Explore'),
           NavigationDestination(icon: Icon(Icons.chat), label: 'Chat'),
           NavigationDestination(icon: Icon(Icons.person), label: 'Profile'),
         ]),
