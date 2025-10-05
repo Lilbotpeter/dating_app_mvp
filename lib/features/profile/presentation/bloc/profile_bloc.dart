@@ -62,7 +62,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     final res = await upsert(UpsertProfileParams(event.profile));
     switch (res){
       case DataSuccess<Profile>():
-        emit(ProfileLoaded(res.data!));
+        emit(ProfileSavedSuccess(res.data!));
       case DataFailed():
         emit(ProfileError(res.error?.message ?? 'Save failed'));
     }

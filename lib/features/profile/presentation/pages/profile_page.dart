@@ -1,3 +1,4 @@
+import 'package:dating_china_app_mvp/core/extensions/dialog_context.dart';
 import 'package:dating_china_app_mvp/core/theme/app_theme.dart';
 import 'package:dating_china_app_mvp/core/widgets/loading_overlay.dart';
 import 'package:dating_china_app_mvp/features/profile/presentation/bloc/profile_bloc.dart';
@@ -6,6 +7,7 @@ import 'package:dating_china_app_mvp/features/profile/presentation/bloc/profile_
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
 import '../../domain/entities/profile.dart';
 
@@ -29,27 +31,26 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   void initState() {
     super.initState();
-    context.read<ProfileBloc>().add(const ProfileStarted());
+    BlocProvider.of<ProfileBloc>(context, listen: false).add(const ProfileStarted());
   }
 
   @override
   Widget build(BuildContext context) {
+    final bloc = BlocProvider.of<ProfileBloc>(context, listen: false);
     return Scaffold(
-      appBar: AppBar(title: const Text('My Profile'),actions: [
+      appBar: AppBar(title: Text('My Profile', style: Theme.of(context).textTheme.titleMedium),actions: [
         IconButton(
-          onPressed: () => context.read<ProfileBloc>().add(const ProfileRefreshed()),
+          onPressed: () => bloc.add(const ProfileRefreshed()),
           icon: const Icon(Icons.refresh),
            ),
         IconButton(
-          onPressed: () => context.read<ProfileBloc>().add(ProfileCleared()), 
+          onPressed: () => bloc.add(ProfileCleared()), 
           icon: const Icon(Icons.delete_outline))
-      ]),
+      ],),
       body: BlocConsumer<ProfileBloc, ProfileState>(
-        listener: (context, state){
+        listener: (context, state) async {
           if(state is ProfileError){
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text(state.message)),
-            );
+            await context.showErrorDialog(state.message);
           }
           if(state is ProfileLoaded){
             name.text = state.profile.displayName;
@@ -137,7 +138,15 @@ class _ProfilePageState extends State<ProfilePage> {
           ),
           const SizedBox(height: 16),
           FilledButton.icon(
-            onPressed: _save,
+            onPressed: () async {
+              final success = await context.showConfirmDialog(
+              title: 'ต้องการบันทึกข้อมูลใช่ไหม ?', 
+              message: 'กดปุ่ม "ตกลง" เพื่อบันทึกข้อมูล');
+            if(success == true) {
+              await _save();
+              Modular.to.navigate('/shell/profile');
+              }
+            },
             icon: const Icon(Icons.save),
             label: const Text('Save'),
           ),
@@ -146,18 +155,19 @@ class _ProfilePageState extends State<ProfilePage> {
     );
   }
 
-  void _save() {
+  Future<void> _save() async {
     final profile = Profile(
       id: 'me',
       displayName: name.text.trim().isEmpty ? 'No Name' : name.text.trim(),
       age: int.tryParse(age.text.trim()) ?? 25,
       gender: gender,
       langs: List.of(langs),
-      avatarUrl: null,
+      // avatarUrl: null,
+      avatarUrl: 'https://images.pexels.com/photos/771742/pexels-photo-771742.jpeg', //mock
       lat: null,
       lng: null,
       verified: false,
     );
-    context.read<ProfileBloc>().add(ProfileSaved(profile));
+      BlocProvider.of<ProfileBloc>(context, listen: false).add(ProfileSaved(profile));
   }
 }

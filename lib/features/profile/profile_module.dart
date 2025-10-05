@@ -7,6 +7,7 @@ import 'package:dating_china_app_mvp/features/profile/domain/repositories/profil
 import 'package:dating_china_app_mvp/features/profile/domain/usecases/fetch_remote_profile.dart';
 import 'package:dating_china_app_mvp/features/profile/domain/usecases/get_local_profile.dart';
 import 'package:dating_china_app_mvp/features/profile/presentation/bloc/profile_bloc.dart';
+import 'package:dating_china_app_mvp/features/profile/presentation/pages/profile_overview_page.dart';
 import 'package:dating_china_app_mvp/features/profile/presentation/pages/profile_page.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -52,8 +53,18 @@ class ProfileModule extends FeatureBaseModule{
         final bloc = Modular.get<ProfileBloc>();
         return BlocProvider.value(
           value: bloc,
-          child: const ProfilePage(),
+          child: const ProfileOverviewPage(),
         );
       });
+    
+    r.child(
+      '/edit', 
+      child: (_){
+      final bloc = Modular.get<ProfileBloc>();
+      return BlocProvider.value(
+        value: bloc,
+        child: const ProfilePage(),
+        );
+    });
   }
 }

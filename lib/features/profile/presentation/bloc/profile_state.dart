@@ -30,3 +30,7 @@ class ProfileError extends ProfileState{
   List<Object?> get props => [message];
 }
 
+class ProfileSavedSuccess extends ProfileLoaded {
+  const ProfileSavedSuccess(super.profile);
+}
+
